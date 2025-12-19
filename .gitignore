@@ -1,0 +1,7 @@
+# Proxy server with hardcoded API key
+proxy-server.py
+
+# Development files
+*.pyc
+__pycache__/
+.DS_Store
