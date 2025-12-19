@@ -1,253 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Localio</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
-    <link rel="manifest" href="./images/site.webmanifest">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <title>CRM Demo - AI-Powered Interactive Demo</title>
     <link rel="stylesheet" href="styles.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-
-    <script src="https://kit.fontawesome.com/2ff5e87bf5.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <section class="heading" id="heading">
-        <div class="row banner gx-0">
-            <div class="col-md-5 col-sm-12 banner-text">
-                <div class="banner-info">
-                    <h4 class="logo">Localio</h4>
+    <div class="demo-container">
+        <!-- CRM Interface (Left Side) -->
+        <div class="crm-panel">
+            <div class="crm-header">
+                <h1 class="crm-logo">SalesFlow CRM</h1>
+                <span class="demo-badge">DEMO ENVIRONMENT</span>
+            </div>
 
-                    <h1><strong>Discover,<br />Together.</strong></h1>
-                    <p>Join your friends in discovering your next favorite places - <strong>near or far.</strong>
-                    </p>
-                    <div class="email-signup">
-                        <p>Enter your email below to apply for Beta access.</p>
-                        <form onsubmit="sendEmail(1, 'status_msg_1'); return false; reset();">
-                            <div class="input-group mb-3">
-                                <input type="email" id="email_1" class="form-control email-form"
-                                    placeholder="Enter email" aria-label="Email" aria-describedby="button-addon2">
-                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Sign
-                                    Up</a></button>
-                            </div>
-                            <div class="m-t-20">
-                                <div id="status_msg_1"></div>
-                            </div>
-                        </form>
+            <div class="crm-nav">
+                <button class="nav-tab active" data-tab="dashboard">Dashboard</button>
+                <button class="nav-tab" data-tab="contacts">Contacts</button>
+                <button class="nav-tab" data-tab="deals">Deals</button>
+            </div>
+
+            <div class="crm-content">
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content active">
+                    <h2>Dashboard</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Contacts</div>
+                            <div class="stat-value" id="total-contacts">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Active Deals</div>
+                            <div class="stat-value" id="active-deals">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Pipeline Value</div>
+                            <div class="stat-value" id="pipeline-value">$0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Conversion Rate</div>
+                            <div class="stat-value" id="conversion-rate">0%</div>
+                        </div>
+                    </div>
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div id="activity-feed" class="activity-list"></div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-7 col-sm-12 banner-img img-fluid">
-                <img class="" src="./images/Banner_img.png" alt="">
-            </div>
-        </div>
-    </section>
-
-    <main>
-
-        <section class="choose">
-            <div class="choose-text">
-                <h6>Say hello to <span class='logo'>Localio</span></h6>
-                <h2>An anti-social media that helps you <span class='white'>discover the magic of your city.</span></h2>
-            </div>
-            <div class="row choose-holder">
-                <div class="col-md-3 col-sm-12 order-md-1 order-2 subsection-nav">
-                    <button id="button1"><i class="fa-solid fa-location-dot"></i>Discover</button>
-                    <button id="button2"><i class="fa-solid fa-circle-exclamation"></i>Adventure</button>
-                    <button id="button3"><i class="fa-solid fa-bars"></i>Share</button>
-                </div>
-                <div class="col-lg-4 col-md-9 col-sm-12 order-md-2 gif-holder">
-                    <img src="./images/Discover_Gif.gif" alt="" class="gif">
-                </div>
-                <div class="col-lg-4 col-md-12 order-3 gif-text">
-                    <h2 class="gif-heading white">Find new places</h2>
-                    <p class="gif-p">See recommendations from friends, locals, and others with similar interests.</p>
-                    <a href='#heading'><button class="gif-button">Start Discovering</button></a>
-                </div>
-            </div>
-            </div>
-        </section>
-
-        <section class="info">
-            <div class="scrolly-container" speed=70>
-                <div class='scrolling-text'>
-                    <h2 class="scrolling-text-content">Why <span class='logo'>Localio</span> - Why <span
-                            class='logo'>Localio</span> - </h2>
-                </div>
-            </div>
-            <div class="row info-holder gx-5">
-                <div class="col-md-7 col-sm-12 info-text">
-                    <h3>Places vetted by the people that matter to you.</h3>
-                    <p>View your foodie friend's favorites, discover the local dives, or find an antique market that
-                        sells that one thing you’ve been looking for.</p>
-                </div>
-                <div class="col-md-5 col-sm-12 info-img">
-                    <img src="./images/info_img1.png" class="img-fluid" alt="">
-                </div>
-            </div>
-            <div class="row info-holder gx-5">
-                <div class="col-md-7 col-sm-12 order-md-1 order-2 info-img">
-
-                    <img src="./images/Info_img3.png" class="img-fluid" alt="">
-                </div>
-                <div class="col-md-5 col-sm-12 order-md-2 info-text">
-
-
-                    <h3>No missing out.</h3>
-                    <p>No more sitting at home, scrolling through your phone, wishing you were doing something else.
-                    </p>
-                    <p>Discover the best things to do in your area and connect with the people doing them.
-                    </p>
-                </div>
-            </div>
-            <div class="row info-holder gx-5">
-                <div class="col-md-7 col-sm-12 info-text">
-                    <h3>Inspiration
-                        without the headache.</h3>
-                    <p>Stop sorting through blogs, nitpicking reviews, and arguing with loved ones over what to do.
-                    </p>
-                </div>
-                <div class="col-md-5 col-sm-12 info-img">
-                    <img src="./images/Info_img2.png" class="img-fluid" alt="">
-                </div>
-            </div>
-        </section>
-
-    </main>
-    <section class="bottom-banner">
-        <div class="bb-text">
-            <h2>Uncover your city's secrets</h2>
-            <p>Your lifetime should be full of adventures and discoveries. <span class='white'>Don’t miss out
-                    because
-                    you didn’t know about them.</span></p>
-            <a href="#heading"><button class="gif-button">Uncover them</button></a>
-        </div>
-    </section>
-    <section class="faq">
-        <div class="faq-text">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            When will Localio be available?
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">We are shooting to launch the Beta program mid-2023. Depending on
-                            Beta receptability, our full launch date is currently aimed for sometime early 2024.</div>
+                <!-- Contacts Tab -->
+                <div id="contacts" class="tab-content">
+                    <div class="tab-header">
+                        <h2>Contacts</h2>
+                        <button class="btn-primary" onclick="showAddContactModal()">+ Add Contact</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="contact-search" placeholder="Search contacts..." />
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Company</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contacts-table"></tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                            What locations will Localio be available in?
-                        </button>
-                    </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">The full version of Localio will be available worldwide, but the
-                            Beta tests will focus around the Mexico region. <br /><br />However, if you would like to be
-                            a
-                            Beta
-                            tester and are not located in Mexico, you still can! You will just not get the intended
-                            functionality due to a likely smaller number of people in your region.</div>
+
+                <!-- Deals Tab -->
+                <div id="deals" class="tab-content">
+                    <div class="tab-header">
+                        <h2>Deals</h2>
+                        <button class="btn-primary" onclick="showAddDealModal()">+ Add Deal</button>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseThree" aria-expanded="false"
-                            aria-controls="flush-collapseThree">
-                            Can I get beta access?
-                        </button>
-                    </h2>
-                    <div id="flush-collapseThree" class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">We would love to hear your thoughts on Localio's Beta! Simply
-                            enter
-                            your email below to apply for the Beta tests.</div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseFour" aria-expanded="false"
-                            aria-controls="flush-collapseFour">
-                            How can I learn more about Localio?
-                        </button>
-                    </h2>
-                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">You can sign up with your email below to get Beta access and updates
-                            on big news, or you can follow our founder @kierin_flanagan on Twitter to see any news he
-                            posts about it.</div>
+                    <div class="deals-pipeline">
+                        <div class="pipeline-column">
+                            <h3>Prospecting</h3>
+                            <div id="deals-prospecting" class="deal-cards"></div>
+                        </div>
+                        <div class="pipeline-column">
+                            <h3>Proposal</h3>
+                            <div id="deals-proposal" class="deal-cards"></div>
+                        </div>
+                        <div class="pipeline-column">
+                            <h3>Negotiation</h3>
+                            <div id="deals-negotiation" class="deal-cards"></div>
+                        </div>
+                        <div class="pipeline-column">
+                            <h3>Closed Won</h3>
+                            <div id="deals-won" class="deal-cards"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <footer id="footer">
-        <div class="footer-text">
-            <h3>Be one of the first to try. <br /><span class='white'>Sign up for the <span class='logo'>Localio</span>
-                    Beta
-                    today!</span></h3>
-            <form onsubmit="sendEmail(2, 'status_msg_2'); reset(); return false;">
-                <div class="input-group mb-3">
-                    <input type="email" id="email_2" class="form-control email-form" placeholder="Enter email"
-                        aria-label="Email" aria-describedby="button-addon2">
 
-                    <button class="btn btn-outline-secondary footer-btn" type="submit" id="button-addon2">Sign
-                        Up</a></button>
+        <!-- Chat Panel (Right Side) -->
+        <div class="chat-panel">
+            <div class="chat-header">
+                <div>
+                    <h2>AI Demo Assistant</h2>
+                    <p class="chat-subtitle">Ask me to show you around</p>
                 </div>
-                <div class="m-t-20">
-                    <div id="status_msg_2"></div>
+                <button class="btn-reset" onclick="resetDemo()">Reset Demo</button>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message agent-message">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content">
+                        <p>Welcome to SalesFlow CRM! 👋</p>
+                        <p>I'm your AI demo assistant. I can show you how this CRM works by performing real actions in the interface.</p>
+                        <p>Try asking me to:</p>
+                        <ul>
+                            <li>"Show me how to add a new customer"</li>
+                            <li>"Create a deal for Acme Corp"</li>
+                            <li>"Show me the contact list"</li>
+                            <li>"Add a note to a customer"</li>
+                            <li>"Move a deal to the next stage"</li>
+                        </ul>
+                        <p class="note">Note: All data shown here is demo data for illustration purposes only.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <form id="chat-form" onsubmit="return false;">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="Ask me to demonstrate something..."
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="btn-send" id="send-btn">
+                        <span>Send</span>
+                    </button>
+                </form>
+                <div class="api-key-notice" id="api-key-notice">
+                    ⚠️ <a href="#" onclick="showApiKeyModal(); return false;">Add your Anthropic API key</a> to enable the AI assistant
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="api-key-modal" class="modal">
+        <div class="modal-content">
+            <h3>Configure API Key</h3>
+            <p>Enter your Anthropic API key to enable the AI assistant. Your key is stored locally in your browser and never sent to any server except Anthropic's API.</p>
+            <input type="password" id="api-key-input" placeholder="sk-ant-..." />
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeApiKeyModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
+            </div>
+            <p class="modal-note">Don't have an API key? <a href="https://console.anthropic.com/" target="_blank">Get one from Anthropic</a></p>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add Contact</h3>
+            <form id="contact-form">
+                <input type="text" id="contact-name" placeholder="Name" required />
+                <input type="text" id="contact-company" placeholder="Company" required />
+                <input type="email" id="contact-email" placeholder="Email" required />
+                <input type="tel" id="contact-phone" placeholder="Phone" />
+                <select id="contact-status">
+                    <option value="lead">Lead</option>
+                    <option value="prospect">Prospect</option>
+                    <option value="customer">Customer</option>
+                </select>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeContactModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Contact</button>
                 </div>
             </form>
         </div>
-    </footer>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <script src="scrolly.js"></script>
+    <div id="deal-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add Deal</h3>
+            <form id="deal-form">
+                <input type="text" id="deal-name" placeholder="Deal Name" required />
+                <select id="deal-contact" required>
+                    <option value="">Select Contact</option>
+                </select>
+                <input type="number" id="deal-value" placeholder="Deal Value ($)" required />
+                <select id="deal-stage">
+                    <option value="prospecting">Prospecting</option>
+                    <option value="proposal">Proposal</option>
+                    <option value="negotiation">Negotiation</option>
+                    <option value="won">Closed Won</option>
+                </select>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeDealModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Deal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script>
-        function sendEmail(formId, statusId) {
-            const userEmail = document.getElementById(`email_${formId}`).value;
-            const statusMsg = document.getElementById(statusId);
-            Email.send({
-                SecureToken: "ad525f8b-bc2e-4f88-a230-8c041cf3a9b9",
-                To: 'kierinflan@gmail.com',
-                From: 'kierinflan@gmail.com',
-                Subject: "Someone has signed up for the Localio Beta!",
-                Body: userEmail
-            }).then(() => {
-                statusMsg.innerHTML = 'Email sent successfully!';
-            }).catch((error) => {
-                statusMsg.innerHTML = 'Failed to send email: ' + error;
-            });
-        }
-    </script>
 </body>
-
 </html>
