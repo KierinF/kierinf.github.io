@@ -517,15 +517,17 @@ I've switched to the Contacts tab and highlighted Sarah Johnson from Acme Corp. 
 
 async function callClaudeAPI(systemPrompt, userMessage) {
     try {
-        // Use local proxy server to avoid CORS issues
-        const response = await fetch('http://localhost:8081/api/messages', {
+        // Call Anthropic API directly with user's API key
+        const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-api-key': state.apiKey,
+                'anthropic-version': '2023-06-01'
             },
             body: JSON.stringify({
-                model: 'claude-3-haiku-20240307',
-                max_tokens: 1024,
+                model: 'claude-3-5-sonnet-20240620',
+                max_tokens: 2048,
                 system: systemPrompt,
                 messages: [
                     ...state.conversationHistory,
@@ -556,7 +558,7 @@ async function callClaudeAPI(systemPrompt, userMessage) {
         return assistantMessage;
     } catch (error) {
         if (error.message === 'Failed to fetch') {
-            throw new Error('CORS Error: Browser blocked the request. You need a backend proxy server to call the Anthropic API from a browser. See console for details.');
+            throw new Error('Network error: Unable to reach Anthropic API. This may be due to CORS restrictions. Please check your browser console for details.');
         }
         throw error;
     }
