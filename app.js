@@ -4,7 +4,7 @@
 
 // IMPORTANT: Replace this URL with your deployed proxy server URL
 // See /proxy/README.md for deployment instructions
-const PROXY_URL = 'https://https://railway.com/project/f3d278cb-e34a-47f3-b9ba-821e95cdb15a/service/ec0ba83d-9da6-4907-98c3-aab5f602d6ab/variables?environmentId=a38bc849-ed5b-4ff0-91b0-44b0ab61a3f8/api/messages';
+const PROXY_URL = 'https://https://railway.com/project/f3d278cb-e34a-47f3-b9ba-821e95cdb15a/service/ec0ba83d-9da6-4907-98c3-aab5f602d6ab/variables?environmentId=a38bc849-ed5b-4ff0-91b0-44b0ab61a3f8/';
 
 // State Management
 const state = {
@@ -757,4 +757,5 @@ window.showAddDealModal = showAddDealModal;
 window.closeDealModal = closeDealModal;
 window.viewContact = viewContact;
 window.resetDemo = resetDemo;
+
 
