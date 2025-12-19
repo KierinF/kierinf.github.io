@@ -516,44 +516,50 @@ I've switched to the Contacts tab and highlighted Sarah Johnson from Acme Corp. 
 }
 
 async function callClaudeAPI(systemPrompt, userMessage) {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': state.apiKey,
-            'anthropic-version': '2023-06-01'
-        },
-        body: JSON.stringify({
-            model: 'claude-3-5-sonnet-20241022',
-            max_tokens: 1024,
-            system: systemPrompt,
-            messages: [
-                ...state.conversationHistory,
-                { role: 'user', content: userMessage }
-            ]
-        })
-    });
+    try {
+        // Use local proxy server to avoid CORS issues
+        const response = await fetch('http://localhost:8081/api/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: 'claude-3-5-sonnet-20241022',
+                max_tokens: 1024,
+                system: systemPrompt,
+                messages: [
+                    ...state.conversationHistory,
+                    { role: 'user', content: userMessage }
+                ]
+            })
+        });
 
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error?.message || 'API request failed');
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error?.message || 'API request failed');
+        }
+
+        const data = await response.json();
+        const assistantMessage = data.content[0].text;
+
+        // Update conversation history
+        state.conversationHistory.push(
+            { role: 'user', content: userMessage },
+            { role: 'assistant', content: assistantMessage }
+        );
+
+        // Keep history manageable
+        if (state.conversationHistory.length > 20) {
+            state.conversationHistory = state.conversationHistory.slice(-20);
+        }
+
+        return assistantMessage;
+    } catch (error) {
+        if (error.message === 'Failed to fetch') {
+            throw new Error('CORS Error: Browser blocked the request. You need a backend proxy server to call the Anthropic API from a browser. See console for details.');
+        }
+        throw error;
     }
-
-    const data = await response.json();
-    const assistantMessage = data.content[0].text;
-
-    // Update conversation history
-    state.conversationHistory.push(
-        { role: 'user', content: userMessage },
-        { role: 'assistant', content: assistantMessage }
-    );
-
-    // Keep history manageable
-    if (state.conversationHistory.length > 20) {
-        state.conversationHistory = state.conversationHistory.slice(-20);
-    }
-
-    return assistantMessage;
 }
 
 async function executeAgentResponse(response) {
