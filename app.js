@@ -2,6 +2,10 @@
 // SalesFlow CRM - AI Demo Agent
 // ============================================================================
 
+// IMPORTANT: Replace this URL with your deployed proxy server URL
+// See /proxy/README.md for deployment instructions
+const PROXY_URL = 'https://YOUR-PROXY-URL-HERE.com/api/messages';
+
 // State Management
 const state = {
     contacts: [],
@@ -301,14 +305,18 @@ function checkApiKey() {
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('send-btn');
 
-    if (state.apiKey) {
+    // Check if proxy URL has been configured
+    const PROXY_CONFIGURED = !PROXY_URL.includes('YOUR-PROXY-URL-HERE');
+
+    if (PROXY_CONFIGURED) {
         notice.classList.add('hidden');
         chatInput.disabled = false;
         sendBtn.disabled = false;
     } else {
+        // Show proxy setup notice
         notice.classList.remove('hidden');
-        chatInput.disabled = true;
-        sendBtn.disabled = true;
+        chatInput.disabled = false; // Allow chat for better UX, will show error if proxy not set
+        sendBtn.disabled = false;
     }
 }
 
@@ -517,13 +525,10 @@ I've switched to the Contacts tab and highlighted Sarah Johnson from Acme Corp. 
 
 async function callClaudeAPI(systemPrompt, userMessage) {
     try {
-        // Call Anthropic API directly with user's API key
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
+        const response = await fetch(PROXY_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': state.apiKey,
-                'anthropic-version': '2023-06-01'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 model: 'claude-3-5-sonnet-20240620',
