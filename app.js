@@ -2,8 +2,9 @@
 // SalesFlow CRM - AI Demo Agent
 // ============================================================================
 
-// Proxy server deployed on Railway
-const PROXY_URL = 'https://kierinfgithubio-production.up.railway.app/api/messages';
+// IMPORTANT: Replace this URL with your deployed proxy server URL
+// See /proxy/README.md for deployment instructions
+const PROXY_URL = 'kierinfgithubio-production.up.railway.app/api/messages';
 
 // State Management
 const state = {
@@ -756,3 +757,6 @@ window.showAddDealModal = showAddDealModal;
 window.closeDealModal = closeDealModal;
 window.viewContact = viewContact;
 window.resetDemo = resetDemo;
+
+
+
