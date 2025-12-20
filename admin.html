@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Manager - AI Discovery Tour</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>AI Discovery Tour - Content Manager</h1>
+            <div class="header-actions">
+                <a href="index.html" class="btn-secondary">View Tour</a>
+                <button onclick="exportContent()" class="btn-secondary">Export Data</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="section-header">
+                    <h2>Upload Content</h2>
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="switchUploadTab('video')">Video</button>
+                        <button class="tab-btn" onclick="switchUploadTab('pdf')">PDF/Document</button>
+                    </div>
+                </div>
+
+                <!-- Video Upload Form -->
+                <div id="video-upload" class="upload-form active">
+                    <div class="form-group">
+                        <label>Video URL (Google Drive, YouTube, or Vimeo)</label>
+                        <input type="url" id="video-url" placeholder="https://drive.google.com/file/d/..." />
+                        <span class="hint">Make sure the link is set to "Anyone with the link can view"</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Video Title</label>
+                        <input type="text" id="video-title" placeholder="e.g., Product Demo - Compliance Features" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Transcript (from Gong or manual)</label>
+                        <textarea id="video-transcript" rows="10" placeholder="Paste your Gong transcript here...
+
+Example format:
+0:00 | Speaker Name
+Transcript text here...
+
+0:30 | Another Speaker
+More transcript..."></textarea>
+                        <span class="hint">AI will analyze this to suggest segments and topics</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tags/Topics (comma-separated)</label>
+                        <input type="text" id="video-tags" placeholder="compliance, onboarding, integration, pricing" />
+                        <span class="hint">Optional - AI will also suggest tags from the transcript</span>
+                    </div>
+
+                    <button onclick="analyzeVideoTranscript()" class="btn-secondary" id="analyze-btn">
+                        <span>🤖 Analyze Transcript (AI)</span>
+                    </button>
+
+                    <div id="ai-suggestions" class="ai-suggestions" style="display: none;">
+                        <h4>AI Suggested Segments:</h4>
+                        <div id="suggested-segments"></div>
+                    </div>
+
+                    <button onclick="saveVideo()" class="btn-primary">Save Video</button>
+                </div>
+
+                <!-- PDF Upload Form -->
+                <div id="pdf-upload" class="upload-form">
+                    <div class="form-group">
+                        <label>Document URL (Google Drive or direct link)</label>
+                        <input type="url" id="pdf-url" placeholder="https://drive.google.com/file/d/..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Document Title</label>
+                        <input type="text" id="pdf-title" placeholder="e.g., Security Compliance Whitepaper" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Document Type</label>
+                        <select id="pdf-type">
+                            <option value="case-study">Case Study</option>
+                            <option value="whitepaper">Whitepaper</option>
+                            <option value="datasheet">Datasheet</option>
+                            <option value="pricing">Pricing Sheet</option>
+                            <option value="technical">Technical Specification</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What questions does this answer?</label>
+                        <textarea id="pdf-topics" rows="3" placeholder="e.g., How do you handle data security? What compliance certifications do you have?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tags (comma-separated)</label>
+                        <input type="text" id="pdf-tags" placeholder="security, compliance, soc2, gdpr" />
+                    </div>
+
+                    <button onclick="savePDF()" class="btn-primary">Save Document</button>
+                </div>
+            </section>
+
+            <!-- Content Library -->
+            <section class="library-section">
+                <div class="section-header">
+                    <h2>Content Library</h2>
+                    <div class="library-stats">
+                        <span id="video-count">0 videos</span>
+                        <span id="pdf-count">0 documents</span>
+                    </div>
+                </div>
+
+                <div class="library-tabs">
+                    <button class="tab-btn active" onclick="switchLibraryTab('videos')">Videos</button>
+                    <button class="tab-btn" onclick="switchLibraryTab('pdfs')">Documents</button>
+                    <button class="tab-btn" onclick="switchLibraryTab('intents')">Suggested Intents</button>
+                </div>
+
+                <div id="videos-library" class="library-content active">
+                    <div id="videos-list" class="content-grid"></div>
+                </div>
+
+                <div id="pdfs-library" class="library-content">
+                    <div id="pdfs-list" class="content-grid"></div>
+                </div>
+
+                <div id="intents-library" class="library-content">
+                    <div class="intents-info">
+                        <p>AI will analyze your content and suggest buyer intent options for the tour.</p>
+                        <button onclick="generateIntents()" class="btn-primary">🤖 Generate Intent Options</button>
+                    </div>
+                    <div id="intents-list" class="intents-grid"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="shared.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
