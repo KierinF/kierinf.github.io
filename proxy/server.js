@@ -3,7 +3,7 @@ import cors from 'cors';
 import fetch from 'node-fetch';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // IMPORTANT: Set this in your deployment platform's environment variables
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
