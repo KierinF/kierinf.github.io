@@ -13,9 +13,17 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-// Enable CORS for all origins (restrict this in production if needed)
-app.use(cors());
+// Enable CORS for all origins with permissive settings
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: false
+}));
 app.use(express.json());
+
+// Explicit OPTIONS handler for CORS preflight
+app.options('*', cors());
 
 // Health check endpoint
 app.get('/', (req, res) => {
@@ -25,6 +33,8 @@ app.get('/', (req, res) => {
 // Proxy endpoint for Anthropic API
 app.post('/api/messages', async (req, res) => {
   try {
+    console.log('Received POST to /api/messages');
+    console.log('Request body:', JSON.stringify(req.body).substring(0, 100) + '...');
     console.log('Proxying request to Anthropic API...');
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -58,7 +68,13 @@ app.post('/api/messages', async (req, res) => {
   }
 });
 
+// Catch-all for debugging unmatched routes
+app.use((req, res) => {
+  console.log(`Unmatched request: ${req.method} ${req.path}`);
+  res.status(404).json({ error: 'Not found', path: req.path, method: req.method });
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Proxy server running on port ${PORT}`);
-  console.log(`   Set ANTHROPIC_API_KEY environment variable to enable API calls`);
+  console.log(`   API key configured: ${ANTHROPIC_API_KEY ? 'Yes' : 'No'}`);
 });
